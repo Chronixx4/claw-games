@@ -1,0 +1,374 @@
+:root {
+    /* FICSIT Farben (für Satisfactory) */
+    --ficsit-orange: #FF6B00; /* Hauptakzentfarbe (FICSIT Orange) */
+    --ficsit-dark: #2C3E50; /* Dunkles Blau/Grau für Hintergrund/Text */
+    --ficsit-medium: #34495E; /* Etwas helleres Dunkelblau */
+    --ficsit-light: #ECF0F1; /* Helles Grau für Text/Hintergrundelemente */
+    --ficsit-green: #2ECC71; /* Akzentgrün für Erfolge/Links */
+    --ficsit-border: #1ABC9C; /* Cyan-ähnlicher Rand für Elemente */
+
+    /* Allgemeine Farben für die Startseite */
+    --homepage-bg: #1F2833; /* Dunkler, neutraler Hintergrund */
+    --homepage-accent: #66FCF1; /* Helle Akzentfarbe */
+    --homepage-text: #C5C6C7; /* Heller Text */
+    --homepage-card-bg: #2C3E50; /* Kartenhintergrund */
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif; /* Mit Fallback */
+    margin: 0;
+    padding: 0;
+    background-color: var(--ficsit-dark); /* Standard-Hintergrund, wird überschrieben */
+    color: var(--ficsit-light); /* Standard-Textfarbe, wird überschrieben */
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1000px; /* Maximale Breite des Inhalts */
+    margin: 0 auto; /* Zentrierung */
+    padding: 0 20px; /* Innenabstand an den Seiten */
+}
+
+header {
+    background-color: var(--ficsit-medium); /* Standard-Header, wird überschrieben */
+    color: var(--ficsit-light);
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 3px solid var(--ficsit-orange); /* Standard-Akzentlinie, wird überschrieben */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.logo {
+    height: 40px; /* Größe des Logos anpassen */
+    margin-right: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: var(--ficsit-light);
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: var(--ficsit-orange); /* Standard-Buttonfarbe, wird überschrieben */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+nav ul li a:hover {
+    background-color: #E65A00; /* Dunkleres Orange beim Hover, wird überschrieben */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+main {
+    padding: 40px 0;
+    min-height: calc(100vh - 180px); /* Damit der Footer unten bleibt */
+}
+
+.server-info-card {
+    background-color: var(--ficsit-medium); /* Standard-Kartenhintergrund, wird überschrieben */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    border: 2px solid var(--ficsit-border); /* Standard-Akzentrand, wird überschrieben */
+    margin-bottom: 30px;
+}
+
+.server-info-card h2 {
+    color: var(--ficsit-orange); /* Standard-Überschrift, wird überschrieben */
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 2.2em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.server-info-card ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 25px;
+}
+
+.server-info-card ul li {
+    background-color: var(--ficsit-dark); /* Standard-Listeneintrag, wird überschrieben */
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-left: 5px solid var(--ficsit-green); /* Standard-Akzentstreifen, wird überschrieben */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1em;
+}
+
+.server-info-card ul li strong {
+    color: var(--ficsit-light);
+}
+
+.info-value {
+    color: var(--ficsit-orange); /* Standard-Wertefarbe, wird überschrieben */
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.cta {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1.3em;
+    font-style: italic;
+    color: var(--ficsit-green); /* Standard-CTA Farbe, wird überschrieben */
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: var(--ficsit-medium);
+    color: var(--ficsit-light);
+    border-top: 3px solid var(--ficsit-border); /* Standard-Akzentlinie, wird überschrieben */
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Spezifische Stile nach Thema (durch body-Klasse aktiviert) --- */
+
+/* Startseiten-Stile */
+.homepage body {
+    background-color: var(--homepage-bg);
+    color: var(--homepage-text);
+}
+.homepage header {
+    background-color: var(--homepage-card-bg);
+    border-bottom-color: var(--homepage-accent);
+    color: #fff; /* Header-Text heller */
+}
+.homepage nav ul li a {
+    background-color: var(--homepage-accent);
+    color: var(--homepage-bg); /* Dunkler Text auf hellem Button */
+}
+.homepage nav ul li a:hover {
+    background-color: #4AD9E8; /* Etwas dunkler beim Hover */
+}
+.homepage .welcome-card {
+    background-color: var(--homepage-card-bg);
+    border: 2px solid var(--homepage-accent);
+    color: var(--homepage-text);
+    text-align: center; /* Inhalt zentrieren */
+    padding: 40px;
+}
+.homepage .welcome-card h2 {
+    color: var(--homepage-accent);
+    margin-bottom: 25px;
+}
+.homepage .welcome-card p {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+.homepage footer {
+    background-color: var(--homepage-card-bg);
+    border-top-color: var(--homepage-accent);
+    color: var(--homepage-text);
+}
+
+.game-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Abstand zwischen den Buttons */
+    margin-top: 30px;
+    flex-wrap: wrap; /* Umbruch auf kleinen Bildschirmen */
+}
+
+.game-button {
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.game-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Spezifische Button-Farben für die Startseite */
+.satisfactory-button {
+    background-color: var(--ficsit-orange);
+    color: var(--ficsit-light);
+}
+.satisfactory-button:hover {
+    background-color: #E65A00;
+}
+
+.minecraft-button {
+    background-color: #8BC34A; /* Minecraft Grün */
+    color: #333;
+}
+.minecraft-button:hover {
+    background-color: #689F38;
+}
+
+.discord-button {
+    background-color: #7289DA; /* Discord Blau */
+    color: #fff;
+}
+.discord-button:hover {
+    background-color: #5865F2;
+}
+
+
+/* Satisfactory-Stile (jetzt speziell für satisfactory.html) */
+.satisfactory body {
+    background-color: var(--ficsit-dark);
+    color: var(--ficsit-light);
+}
+.satisfactory header {
+    background-color: var(--ficsit-medium);
+    border-bottom-color: var(--ficsit-orange);
+}
+.satisfactory nav ul li a {
+    background-color: var(--ficsit-orange);
+}
+.satisfactory nav ul li a:hover {
+    background-color: #E65A00;
+}
+.satisfactory .server-info-card {
+    background-color: var(--ficsit-medium);
+    border-color: var(--ficsit-border);
+}
+.satisfactory .server-info-card h2 {
+    color: var(--ficsit-orange);
+}
+.satisfactory .server-info-card ul li {
+    background-color: var(--ficsit-dark);
+    border-left-color: var(--ficsit-green);
+}
+.satisfactory .info-value {
+    color: var(--ficsit-orange);
+}
+.satisfactory .cta {
+    color: var(--ficsit-green);
+}
+.satisfactory footer {
+    background-color: var(--ficsit-medium);
+    border-top-color: var(--ficsit-border);
+}
+
+/* Minecraft-Stile */
+.minecraft body {
+    background-color: #A9D65B; /* Grüner Wiesen-Hintergrund */
+    color: #333;
+}
+.minecraft header, .minecraft footer {
+    background-color: #558B2F; /* Dunkelgrün */
+    border-color: #8BC34A; /* Hellgrün */
+    color: #fff;
+}
+.minecraft nav ul li a {
+    background-color: #8BC34A; /* Minecraft Grün für Buttons */
+    color: #333;
+}
+.minecraft nav ul li a:hover {
+    background-color: #689F38; /* Dunkleres Grün beim Hover */
+}
+.minecraft .server-info-card {
+    background-color: #9CCC65; /* Etwas dunkleres Grün für Karten */
+    border-color: #689F38;
+    color: #333;
+}
+.minecraft .server-info-card h2 {
+    color: #333; /* Dunkler Text für Überschrift */
+}
+.minecraft .server-info-card ul li {
+    background-color: #DCE775; /* Helles Gelbgrün für Listeneinträge */
+    border-left-color: #4CAF50; /* Klassisches Minecraft-Grün */
+    color: #333;
+}
+.minecraft .server-info-card ul li strong {
+    color: #333;
+}
+.minecraft .info-value {
+    color: #4CAF50; /* Akzentfarbe Grün */
+}
+.minecraft .cta {
+    color: #689F38;
+}
+
+/* Discord-Stile */
+.discord body {
+    background-color: #36393F; /* Discord Dunkelgrau */
+    color: #DCDDDE;
+}
+.discord header, .discord footer {
+    background-color: #5865F2; /* Discord Blau */
+    border-color: #7289DA; /* Helleres Discord Blau */
+    color: #fff;
+}
+.discord nav ul li a {
+    background-color: #7289DA; /* Discord Blau für Buttons */
+    color: #fff;
+}
+.discord nav ul li a:hover {
+    background-color: #6A7FD4; /* Dunkleres Blau beim Hover */
+}
+.discord .server-info-card {
+    background-color: #424549; /* Discord Mittelgrau für Karten */
+    border-color: #5865F2;
+    color: #DCDDDE;
+}
+.discord .server-info-card h2 {
+    color: #5865F2; /* Discord Blau für Überschrift */
+}
+.discord .server-info-card ul li {
+    background-color: #4F545C; /* Discord etwas helleres Grau für Listeneinträge */
+    border-left-color: #7289DA; /* Helleres Discord Blau */
+    color: #DCDDDE;
+}
+.discord .server-info-card ul li strong {
+    color: #DCDDDE;
+}
+.discord .info-value {
+    color: #7289DA; /* Akzentfarbe Blau */
+}
+.discord .cta {
+    color: #7289DA;
+}
+
+/* --- Neue Stile für den Serverstatus --- */
+.status-loading {
+    color: #FFC107; /* Gelb für Ladezustand */
+    font-weight: bold;
+}
+
+.status-online {
+    color: #4CAF50; /* Grün für Online */
+    font-weight: bold;
+}
+
+.status-offline {
+    color: #F44336; /* Rot für Offline */
+    font-weight: bold;
+}
+
+.status-error {
+    color: #FF9800; /* Orange für Fehler */
+    font-weight: bold;
+}
