@@ -36,6 +36,25 @@ header {
     text-align: center;
     border-bottom: 3px solid var(--ficsit-orange); /* Standard-Akzentlinie, wird überschrieben */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+    /* Sticky Navigation Bar und Schrumpf-Effekt */
+    position: sticky; /* Macht den Header "sticky" */
+    top: 0; /* Bleibt oben am Bildschirm */
+    z-index: 1000; /* Stellt sicher, dass er über anderen Inhalten liegt */
+    transition: all 0.3s ease-in-out; /* Sanfter Übergang für alle Änderungen */
+
+    /* Liquid Glass Optik */
+    background-color: rgba(44, 62, 80, 0.7); /* Weniger undurchsichtig */
+    backdrop-filter: blur(10px) saturate(180%); /* Der Magie-Effekt! */
+    -webkit-backdrop-filter: blur(10px) saturate(180%); /* Für Safari */
+    border: 1px solid rgba(255, 255, 255, 0.125); /* Leichter, heller Rand */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25); /* Sanfterer Schatten */
+}
+
+header.scrolled {
+    padding: 10px 0; /* Weniger Padding beim Scrollen */
+    font-size: 0.9em; /* Schriftgröße etwas kleiner */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4); /* Leichterer Schatten */
 }
 
 header h1 {
@@ -43,6 +62,12 @@ header h1 {
     align-items: center;
     justify-content: center;
     margin-bottom: 15px;
+    transition: font-size 0.3s ease-in-out, margin-bottom 0.3s ease-in-out;
+}
+
+header.scrolled h1 {
+    font-size: 1.8em; /* Titel kleiner */
+    margin-bottom: 5px;
 }
 
 /* Das Logo-CSS wurde entfernt */
@@ -70,6 +95,11 @@ nav ul li a {
     text-transform: uppercase;
 }
 
+header.scrolled nav ul li a {
+    padding: 8px 15px; /* Buttons kleiner */
+    font-size: 0.85em;
+}
+
 nav ul li a:hover {
     background-color: #E65A00; /* Dunkleres Orange beim Hover, wird überschrieben */
     transform: translateY(-3px);
@@ -90,6 +120,13 @@ main {
     margin-bottom: 30px;
     /* Animation für die Karte beim Laden */
     animation: fadeInScale 0.8s ease-out forwards;
+
+    /* Liquid Glass Optik */
+    background-color: rgba(44, 62, 80, 0.7); /* Weniger undurchsichtig */
+    backdrop-filter: blur(10px) saturate(180%); /* Der Magie-Effekt! */
+    -webkit-backdrop-filter: blur(10px) saturate(180%); /* Für Safari */
+    border: 1px solid rgba(255, 255, 255, 0.125); /* Leichter, heller Rand */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25); /* Sanfterer Schatten */
 }
 
 .server-info-card h2 {
@@ -120,6 +157,10 @@ main {
     opacity: 0;
     transform: translateY(10px);
     animation: slideInUp 0.5s ease-out forwards;
+
+    /* Liquid Glass Optik */
+    background-color: rgba(44, 62, 80, 0.5); /* Etwas transparenter als die Karte selbst */
+    border-left: 5px solid rgba(46, 204, 113, 0.7); /* Akzentfarbe auch semi-transparent */
 }
 
 /* Verzögerung für jeden Listeneintrag */
@@ -155,6 +196,13 @@ footer {
     color: var(--ficsit-light);
     border-top: 3px solid var(--ficsit-border); /* Standard-Akzentlinie, wird überschrieben */
     box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.3);
+
+    /* Liquid Glass Optik (ähnlich Header) */
+    background-color: rgba(44, 62, 80, 0.7); /* Weniger undurchsichtig */
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    border-top: 1px solid rgba(255, 255, 255, 0.125);
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.25);
 }
 
 /* --- Spezifische Stile nach Thema (durch body-Klasse aktiviert) --- */
@@ -168,6 +216,9 @@ footer {
     background-color: var(--homepage-card-bg);
     border-bottom-color: var(--homepage-accent);
     color: #fff; /* Header-Text heller */
+    /* Liquid Glass Optik */
+    background-color: rgba(44, 62, 80, 0.7); /* Ähnlich wie oben, aber spezifischer */
+    border-bottom: 1px solid rgba(102, 252, 241, 0.3);
 }
 .homepage nav ul li a {
     background-color: var(--homepage-accent);
@@ -184,6 +235,10 @@ footer {
     padding: 40px;
     /* Animation für die Willkommenskarte */
     animation: fadeInScale 0.8s ease-out forwards;
+
+    /* Liquid Glass Optik */
+    background-color: rgba(44, 62, 80, 0.7); /* Ähnlich wie oben, aber spezifischer */
+    border: 1px solid rgba(102, 252, 241, 0.3); /* Angepasster Rand für Homepage */
 }
 .homepage .welcome-card h2 {
     color: var(--homepage-accent);
@@ -197,6 +252,9 @@ footer {
     background-color: var(--homepage-card-bg);
     border-top-color: var(--homepage-accent);
     color: var(--homepage-text);
+    /* Liquid Glass Optik */
+    background-color: rgba(44, 62, 80, 0.7);
+    border-top: 1px solid rgba(102, 252, 241, 0.3);
 }
 
 .game-links {
@@ -266,6 +324,9 @@ footer {
 .satisfactory header {
     background-color: var(--ficsit-medium);
     border-bottom-color: var(--ficsit-orange);
+    /* Liquid Glass Optik */
+    background-color: rgba(44, 62, 80, 0.7);
+    border-bottom: 1px solid rgba(255, 107, 0, 0.3);
 }
 .satisfactory nav ul li a {
     background-color: var(--ficsit-orange);
@@ -276,6 +337,9 @@ footer {
 .satisfactory .server-info-card {
     background-color: var(--ficsit-medium);
     border-color: var(--ficsit-border);
+    /* Liquid Glass Optik */
+    background-color: rgba(44, 62, 80, 0.7);
+    border: 1px solid rgba(26, 188, 156, 0.3);
 }
 .satisfactory .server-info-card h2 {
     color: var(--ficsit-orange);
@@ -283,6 +347,9 @@ footer {
 .satisfactory .server-info-card ul li {
     background-color: var(--ficsit-dark);
     border-left-color: var(--ficsit-green);
+    /* Liquid Glass Optik */
+    background-color: rgba(44, 62, 80, 0.5);
+    border-left: 5px solid rgba(46, 204, 113, 0.7);
 }
 .satisfactory .info-value {
     color: var(--ficsit-orange);
@@ -293,6 +360,9 @@ footer {
 .satisfactory footer {
     background-color: var(--ficsit-medium);
     border-top-color: var(--ficsit-border);
+    /* Liquid Glass Optik */
+    background-color: rgba(44, 62, 80, 0.7);
+    border-top: 1px solid rgba(26, 188, 156, 0.3);
 }
 
 /* Minecraft-Stile */
@@ -304,6 +374,9 @@ footer {
     background-color: #558B2F; /* Dunkelgrün */
     border-color: #8BC34A; /* Hellgrün */
     color: #fff;
+    /* Liquid Glass Optik */
+    background-color: rgba(85, 139, 47, 0.7);
+    border-color: rgba(139, 195, 74, 0.3);
 }
 .minecraft nav ul li a {
     background-color: #8BC34A; /* Minecraft Grün für Buttons */
@@ -316,6 +389,9 @@ footer {
     background-color: #9CCC65; /* Etwas dunkleres Grün für Karten */
     border-color: #689F38;
     color: #333;
+    /* Liquid Glass Optik */
+    background-color: rgba(85, 139, 47, 0.7);
+    border-color: rgba(139, 195, 74, 0.3);
 }
 .minecraft .server-info-card h2 {
     color: #333; /* Dunkler Text für Überschrift */
@@ -324,6 +400,9 @@ footer {
     background-color: #DCE775; /* Helles Gelbgrün für Listeneinträge */
     border-left-color: #4CAF50; /* Klassisches Minecraft-Grün */
     color: #333;
+    /* Liquid Glass Optik */
+    background-color: rgba(220, 231, 117, 0.5);
+    border-left-color: rgba(76, 175, 80, 0.7);
 }
 .minecraft .server-info-card ul li strong {
     color: #333;
@@ -344,6 +423,9 @@ footer {
     background-color: #5865F2; /* Discord Blau */
     border-color: #7289DA; /* Helleres Discord Blau */
     color: #fff;
+    /* Liquid Glass Optik */
+    background-color: rgba(54, 57, 63, 0.7);
+    border-color: rgba(88, 101, 242, 0.3);
 }
 .discord nav ul li a {
     background-color: #7289DA; /* Discord Blau für Buttons */
@@ -356,6 +438,9 @@ footer {
     background-color: #424549; /* Discord Mittelgrau für Karten */
     border-color: #5865F2;
     color: #DCDDDE;
+    /* Liquid Glass Optik */
+    background-color: rgba(54, 57, 63, 0.7);
+    border-color: rgba(88, 101, 242, 0.3);
 }
 .discord .server-info-card h2 {
     color: #5865F2; /* Discord Blau für Überschrift */
@@ -364,6 +449,9 @@ footer {
     background-color: #4F545C; /* Discord etwas helleres Grau für Listeneinträge */
     border-left-color: #7289DA; /* Helleres Discord Blau */
     color: #DCDDDE;
+    /* Liquid Glass Optik */
+    background-color: rgba(79, 84, 92, 0.5);
+    border-left-color: rgba(114, 137, 218, 0.7);
 }
 .discord .server-info-card ul li strong {
     color: #DCDDDE;
