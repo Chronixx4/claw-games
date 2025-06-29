@@ -45,10 +45,7 @@ header h1 {
     margin-bottom: 15px;
 }
 
-.logo {
-    height: 40px; /* Größe des Logos anpassen */
-    margin-right: 10px;
-}
+/* Das Logo-CSS wurde entfernt */
 
 nav ul {
     list-style-type: none;
