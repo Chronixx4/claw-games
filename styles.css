@@ -88,6 +88,8 @@ main {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
     border: 2px solid var(--ficsit-border); /* Standard-Akzentrand, wird überschrieben */
     margin-bottom: 30px;
+    /* Animation für die Karte beim Laden */
+    animation: fadeInScale 0.8s ease-out forwards;
 }
 
 .server-info-card h2 {
@@ -114,7 +116,19 @@ main {
     justify-content: space-between;
     align-items: center;
     font-size: 1.1em;
+    /* Animation für Listeneinträge */
+    opacity: 0;
+    transform: translateY(10px);
+    animation: slideInUp 0.5s ease-out forwards;
 }
+
+/* Verzögerung für jeden Listeneintrag */
+.server-info-card ul li:nth-child(1) { animation-delay: 0.2s; }
+.server-info-card ul li:nth-child(2) { animation-delay: 0.4s; }
+.server-info-card ul li:nth-child(3) { animation-delay: 0.6s; }
+.server-info-card ul li:nth-child(4) { animation-delay: 0.8s; }
+.server-info-card ul li:nth-child(5) { animation-delay: 1.0s; }
+
 
 .server-info-card ul li strong {
     color: var(--ficsit-light);
@@ -168,6 +182,8 @@ footer {
     color: var(--homepage-text);
     text-align: center; /* Inhalt zentrieren */
     padding: 40px;
+    /* Animation für die Willkommenskarte */
+    animation: fadeInScale 0.8s ease-out forwards;
 }
 .homepage .welcome-card h2 {
     color: var(--homepage-accent);
@@ -197,9 +213,19 @@ footer {
     border-radius: 10px;
     font-weight: bold;
     text-transform: uppercase;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Übergang für alle Eigenschaften */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Animation für die Buttons beim Laden */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInUp 0.6s ease-out forwards;
 }
+
+/* Verzögerung für jeden Game-Button */
+.game-button:nth-child(1) { animation-delay: 0.5s; }
+.game-button:nth-child(2) { animation-delay: 0.7s; }
+.game-button:nth-child(3) { animation-delay: 0.9s; }
+
 
 .game-button:hover {
     transform: translateY(-5px);
@@ -368,4 +394,27 @@ footer {
 .status-error {
     color: #FF9800; /* Orange für Fehler */
     font-weight: bold;
+}
+
+/* --- Keyframe-Animationen --- */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
