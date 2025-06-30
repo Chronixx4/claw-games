@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body class="clips-page"> <div id="preloader">
+<body class="clips-page">
+    <div id="preloader">
         <div class="loader"></div>
     </div>
     <header>
@@ -20,7 +21,7 @@
                     <li><a href="minecraft.html">Minecraft</a></li>
                     <li><a href="discord.html">Discord Server</a></li>
                     <li><a href="contact.html">Kontakt ✉️</a></li>
-                    <li><a href="clips.html">Clips & Galerie</a></li> 
+                    <li><a href="clips.html">Clips & Galerie</a></li>
                 </ul>
             </nav>
         </div>
@@ -30,46 +31,9 @@
             <section class="clip-gallery-card server-info-card">
                 <h2>Momente, die wir nicht vergessen! ✨</h2>
                 <p>Von epischen Siegen bis zu den lustigsten Fails – hier siehst du die Highlights unserer Gaming-Sessions.</p>
-                <div class="clip-grid">
-                    <div class="clip-item">
-                        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000;">
-                            <video controls preload="metadata" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block;">
-                                <source src="clips/14813553.6_2C54388F94DA0C53.mp4" type="video/mp4">
-                                <source src="clips/epischer_moment.webm" type="video/webm">
-                                Dein Browser unterstützt das Video-Tag nicht. Bitte aktualisiere ihn.
-                            </video>
-                        </div>
+                <div class="clip-grid" id="clipGrid">
                     </div>
-
-                    <div class="clip-item">
-                        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000;">
-                            <video controls preload="metadata" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block;">
-                                <source src="clips/MedalTVREPO20250629003859-tr-edit.mp4" type="video/mp4">
-                                <source src="clips/MedalTVREPO20250629003859-tr-edit.webm" type="video/webm">
-                                Dein Browser unterstützt das Video-Tag nicht. Bitte aktualisiere ihn.
-                            </video>
-                        </div>
-                    </div>
-
-                    <div class="clip-item">
-                        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000;">
-                            <video controls preload="metadata" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block;">
-                                <source src="clips/lustiger_fail.mp4" type="video/mp4">
-                                <source src="clips/lustiger_fail.webm" type="video/webm">
-                                Dein Browser unterstützt das Video-Tag nicht. Bitte aktualisiere ihn.
-                            </video>
-                        </div>
-                    </div>
-                    
-                    <div class="clip-item">
-                        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-                            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                    
-                    </div>
-                <p class="cta" style="margin-top: 30px;">Besuche unseren YouTube-Kanal für noch mehr Action! 📺</p>
-            </section>
+                </section>
         </div>
     </main>
     <footer>
@@ -89,26 +53,112 @@
             }
         });
 
-        // JavaScript zum Ausblenden des Preloaders
+        // Funktion zum dynamischen Laden der Videos
+        function loadClips() {
+            const clipGrid = document.getElementById('clipGrid');
+            if (!clipGrid) {
+                console.error("Element mit ID 'clipGrid' nicht gefunden.");
+                return;
+            }
+
+            // Hier definierst du deine lokalen Videos
+            // Füge einfach neue Objekte zu diesem Array hinzu, um weitere Videos hinzuzufügen!
+            const videos = [
+                {
+                    mp4: "clips/14813553.6_2C54388F94DA0C53.mp4",
+                    webm: "clips/epischer_moment.webm", // Optional, für bessere Browserkompatibilität
+                    type: "local"
+                },
+                {
+                    mp4: "clips/MedalTVREPO20250629003859-tr-edit.mp4",
+                    webm: "clips/MedalTVREPO20250629003859-tr-edit.webm",
+                    type: "local"
+                },
+                {
+                    mp4: "clips/lustiger_fail.mp4",
+                    webm: "clips/lustiger_fail.webm",
+                    type: "local"
+                },
+                // Beispiel für ein weiteres Video:
+                // {
+                //     mp4: "clips/dein_super_clip.mp4",
+                //     webm: "clips/dein_super_clip.webm",
+                //     type: "local"
+                // },
+                // ... und so weiter
+            ];
+
+            // Entferne alle vorhandenen Inhalte aus dem clipGrid vor dem Hinzufügen
+            clipGrid.innerHTML = '';
+
+            videos.forEach(video => {
+                // Wir verarbeiten nur noch lokale Videos
+                if (video.type === 'local') {
+                    const clipItem = document.createElement('div');
+                    clipItem.className = 'clip-item';
+
+                    const innerDiv = document.createElement('div');
+                    innerDiv.style.position = 'relative';
+                    innerDiv.style.paddingBottom = '56.25%'; // 16:9 Seitenverhältnis
+                    innerDiv.style.height = '0';
+                    innerDiv.style.overflow = 'hidden';
+                    innerDiv.style.backgroundColor = '#000'; // Hintergrundfarbe falls Video nicht lädt
+
+                    const videoElement = document.createElement('video');
+                    videoElement.controls = true; // Zeigt Videosteuerung an (Play/Pause, Lautstärke etc.)
+                    videoElement.preload = 'metadata'; // Lädt nur Metadaten (Länge, Dimensionen)
+                    videoElement.style.position = 'absolute';
+                    videoElement.style.top = '0';
+                    videoElement.style.left = '0';
+                    videoElement.style.width = '100%';
+                    videoElement.style.height = '100%';
+                    videoElement.style.display = 'block';
+
+                    // MP4 Source hinzufügen
+                    const sourceMp4 = document.createElement('source');
+                    sourceMp4.src = video.mp4;
+                    sourceMp4.type = 'video/mp4';
+                    videoElement.appendChild(sourceMp4);
+
+                    // WebM Source hinzufügen, falls vorhanden (für bessere Browser-Kompatibilität)
+                    if (video.webm) {
+                        const sourceWebm = document.createElement('source');
+                        sourceWebm.src = video.webm;
+                        sourceWebm.type = 'video/webm';
+                        videoElement.appendChild(sourceWebm);
+                    }
+
+                    // Fallback-Text für Browser, die das Video-Tag nicht unterstützen
+                    const fallbackText = document.createTextNode('Dein Browser unterstützt das Video-Tag nicht. Bitte aktualisiere ihn.');
+                    videoElement.appendChild(fallbackText);
+
+                    innerDiv.appendChild(videoElement);
+                    clipItem.appendChild(innerDiv);
+                    clipGrid.appendChild(clipItem);
+
+                    // Füge den Hover-Effekt für lokale Videos hinzu
+                    clipItem.addEventListener('mouseenter', () => {
+                        videoElement.play().catch(e => console.error("Fehler beim Abspielen des Videos:", e));
+                    });
+
+                    clipItem.addEventListener('mouseleave', () => {
+                        videoElement.pause();
+                        videoElement.currentTime = 0; // Setzt das Video auf den Anfang zurück
+                    });
+                }
+                // YouTube-Videos werden hier bewusst ignoriert, da sie nicht mehr gewünscht sind.
+            });
+        }
+
+        // JavaScript zum Ausblenden des Preloaders und zum Laden der Clips
         window.addEventListener('load', function() {
             const preloader = document.getElementById('preloader');
             if (preloader) {
                 preloader.classList.add('hidden');
             }
 
-            // JavaScript für Video-Hover-Effekt
-            const videoItems = document.querySelectorAll('.clip-item video');
-
-            videoItems.forEach(video => {
-                video.parentElement.parentElement.addEventListener('mouseenter', () => {
-                    video.play().catch(e => console.error("Fehler beim Abspielen des Videos:", e));
-                });
-
-                video.parentElement.parentElement.addEventListener('mouseleave', () => {
-                    video.pause();
-                    video.currentTime = 0; // Setzt das Video auf den Anfang zurück
-                });
-            });
+            // Lade die Clips, sobald die Seite geladen ist
+            loadClips();
         });
     </script>
 </body>
