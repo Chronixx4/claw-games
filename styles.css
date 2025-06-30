@@ -81,32 +81,38 @@ header.scrolled h1 {
 
 /* Das Logo-CSS wurde entfernt */
 
+/* --- Navigation Bar Stile --- */
 nav ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
+    display: flex; /* Aktiviert Flexbox */
+    flex-wrap: wrap; /* Erlaubt das Umbrechen der Links in die nächste Zeile auf kleinen Bildschirmen */
+    justify-content: center; /* Zentriert die Links standardmäßig */
+    gap: 10px; /* Abstand zwischen den Navigationspunkten */
 }
 
 nav ul li {
-    display: inline-block;
-    margin: 0 10px;
+    margin: 0; /* Entfernt den äußeren Margin der Listenelemente, da 'gap' im ul dies übernimmt */
 }
 
 nav ul li a {
     color: var(--ficsit-light);
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 10px 15px; /* Etwas weniger Padding, um Platz zu sparen */
     border-radius: 8px;
     background-color: var(--ficsit-orange); /* Standard-Buttonfarbe, wird überschrieben */
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     font-weight: bold;
     text-transform: uppercase;
+    white-space: nowrap; /* Verhindert, dass Text innerhalb des Buttons umbricht */
+    display: block; /* Stellt sicher, dass Padding korrekt angewendet wird */
 }
 
 header.scrolled nav ul li a {
-    padding: 8px 15px; /* Buttons kleiner */
-    font-size: 0.85em;
+    padding: 8px 12px; /* Buttons kleiner beim Scrollen */
+    font-size: 0.8em; /* Schriftgröße noch etwas kleiner */
 }
 
 nav ul li a:hover {
@@ -553,7 +559,50 @@ footer {
     color: #7289DA;
 }
 
-/* --- Neue Stile für den Serverstatus --- */
+/* Neue Klasse für Clips-Seite */
+.clips-page body {
+    background-color: #222; /* Dunkler Hintergrund für Clips-Seite */
+    color: #eee;
+}
+.clips-page header, .clips-page footer {
+    background-color: #333; /* Dunkelgrau */
+    border-color: #FFD700; /* Gold-Akzent */
+    color: #fff;
+    background-color: rgba(51, 51, 51, 0.7);
+    border-color: rgba(255, 215, 0, 0.3);
+}
+.clips-page nav ul li a {
+    background-color: #FFD700; /* Gold für Buttons */
+    color: #333;
+}
+.clips-page nav ul li a:hover {
+    background-color: #E6C200; /* Dunkleres Gold beim Hover */
+}
+.clips-page .server-info-card { /* Wiederverwendet die Styling-Klasse */
+    background-color: #444; /* Etwas helleres Dunkelgrau für Karten */
+    border-color: #FFD700;
+    color: #eee;
+    background-color: rgba(68, 68, 68, 0.7);
+    border-color: rgba(255, 215, 0, 0.3);
+}
+.clips-page .server-info-card h2 {
+    color: #FFD700;
+}
+.clips-page .cta {
+    color: #FFD700;
+}
+/* Diese sind nur Platzhalter, falls du auf der Clips-Seite doch Listenpunkte/Info-Werte hast,
+   sonst werden sie nicht benötigt */
+.clips-page .server-info-card ul li {
+    background-color: rgba(51, 51, 51, 0.5);
+    border-left-color: rgba(255, 215, 0, 0.7);
+}
+.clips-page .info-value {
+    color: #FFD700;
+}
+
+
+/* --- Neue Stile für den Serverstatus (Minecraft-Seite) --- */
 .status-loading {
     color: #FFC107; /* Gelb für Ladezustand */
     font-weight: bold;
@@ -661,20 +710,14 @@ button[type="submit"] {
         font-size: 1.5em; /* Geschrumpfte Überschrift noch kleiner */
     }
 
+    /* Anpassung für die Navigationsleiste auf kleineren Bildschirmen */
     nav ul {
-        display: flex; /* Flexbox für Navigationspunkte */
-        flex-wrap: wrap; /* Erlaubt das Umbrechen der Links in die nächste Zeile */
-        justify-content: center; /* Zentriert die Links */
-        gap: 10px; /* Abstand zwischen den Links */
+        justify-content: center; /* Bleibt zentriert */
+        gap: 8px; /* Reduziert den Abstand noch etwas */
     }
-
-    nav ul li {
-        margin: 0; /* Entfernt den seitlichen Margin der Listenelemente */
-    }
-
     nav ul li a {
-        padding: 8px 15px; /* Kleinere Buttons in der Navigation */
-        font-size: 0.9em;
+        padding: 7px 12px; /* Kleinere Buttons */
+        font-size: 0.85em;
     }
 
     .server-info-card,
@@ -800,7 +843,7 @@ button[type="submit"] {
     100% { transform: rotate(360deg); }
 }
 
-/* --- Stile für die Clip-Galerie (Discord-Seite) --- */
+/* --- Stile für die Clip-Galerie (Discord-Seite und Clips-Seite) --- */
 .clip-gallery-card .clip-grid {
     display: flex;
     flex-wrap: wrap;
@@ -809,9 +852,9 @@ button[type="submit"] {
 }
 
 .clip-gallery-card .clip-item {
-    flex: 1 1 30%; /* Versucht, 3 Clips pro Reihe anzuzeigen */
-    min-width: 280px; /* Minimale Breite für kleine Bildschirme */
+    flex: 0 1 calc(33.333% - 10px); /* Versucht, 3 Clips pro Reihe anzuzeigen */
     max-width: 350px; /* Maximale Breite pro Clip */
+    min-width: 280px; /* Minimale Breite für kleine Bildschirme */
     
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Übergang für Vergrößerung und Schatten */
     cursor: pointer; /* Zeigt an, dass es interaktiv ist */
@@ -820,7 +863,7 @@ button[type="submit"] {
 }
 
 .clip-gallery-card .clip-item:hover {
-    transform: scale(1.50); /* *** HIER WURDE DER WERT AUF 1.15 GEÄNDERT *** */
+    transform: scale(1.15); /* Vergrößert das Element um 15% */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Fügt einen Schatten hinzu */
     z-index: 10; /* Bringt das gehoverte Element in den Vordergrund */
 }
@@ -842,4 +885,24 @@ button[type="submit"] {
     width: 100%;
     height: 100%;
     display: block;
+}
+
+/* Responsive Anpassungen für die Clip-Galerie auf kleineren Bildschirmen */
+@media (max-width: 768px) {
+    .clip-gallery-card .clip-item {
+        flex: 0 1 calc(50% - 10px); /* 2 Spalten auf Tablets */
+        max-width: unset; /* Entfernt max-width, damit es den verfügbaren Platz besser nutzt */
+        min-width: 250px; /* Etwas kleiner für Tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .clip-gallery-card .clip-item {
+        flex: 0 1 100%; /* 1 Spalte auf Smartphones */
+        max-width: unset; /* Entfernt max-width */
+        min-width: unset; /* Entfernt min-width */
+    }
+    .clip-gallery-card .clip-grid {
+        gap: 15px; 
+    }
 }
