@@ -8,13 +8,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body class="minecraft">
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
     <header>
         <div class="container">
             <h1>Minecraft Server</h1>
             <nav>
                 <ul>
                     <li><a href="index.html">Startseite</a></li>
-                    <li><a href="satisfactory.html">Satisfactory</a></li> <li><a href="minecraft.html">Minecraft</a></li>
+                    <li><a href="satisfactory.html">Satisfactory</a></li>
+                    <li><a href="minecraft.html">Minecraft</a></li>
                     <li><a href="discord.html">Discord Server</a></li>
                     <li><a href="contact.html">Kontakt ✉️</a></li>
                 </ul>
@@ -28,7 +32,8 @@
                 <p>Begib dich in eine Welt voller Abenteuer und Kreativität auf meinem Minecraft Server!</p>
                 <ul>
                     <li><strong>Server-IP:</strong> <span class="info-value">claw-games.ddns.net</span></li>
-                    <li><strong>Port:</strong> <span class="info-value">25565</span></li> <li><strong>Modpack/Version:</strong> <span class="info-value">AllTheMods 10</span></li>
+                    <li><strong>Port:</strong> <span class="info-value">25565</span></li>
+                    <li><strong>Modpack/Version:</strong> <span class="info-value">AllTheMods 10</span></li>
                     <li id="serverStatus">
                         <strong>Status:</strong>
                         <span id="onlineStatus" class="status-loading">Wird geladen...</span>
@@ -98,16 +103,25 @@
 
         // Optional: Aktualisiere den Status alle 60 Sekunden
         setInterval(fetchMinecraftServerStatus, 60000); // 60000 ms = 1 Minute
+
+
+        // JavaScript für die schrumpfende Navigation
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // JavaScript zum Ausblenden des Preloaders
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.classList.add('hidden');
+            }
+        });
     </script>
 </body>
-<script>
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 50) { // Wenn mehr als 50px gescrollt wurde
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-</script>
 </html>

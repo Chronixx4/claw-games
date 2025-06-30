@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<body class="homepage"> <header>
+<body class="homepage">
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+    <header>
         <div class="container">
             <h1>Kontakt zu Claw Games! 💬</h1>
             <nav>
@@ -16,12 +20,14 @@
                     <li><a href="satisfactory.html">Satisfactory</a></li>
                     <li><a href="minecraft.html">Minecraft</a></li>
                     <li><a href="discord.html">Discord Server</a></li>
-                    <li><a href="contact.html">Kontakt ✉️</a></li> </ul>
+                    <li><a href="contact.html">Kontakt ✉️</a></li>
+                </ul>
             </nav>
         </div>
     </header>
     <main>
-        <div class="container welcome-card"> <h2>Schreib uns eine Nachricht! 📧</h2>
+        <div class="container welcome-card">
+            <h2>Schreib uns eine Nachricht! 📧</h2>
             <p>Hast du Fragen, Anregungen oder möchtest einfach nur Hallo sagen? Nutze das Formular unten, um uns eine E-Mail zu senden. Wir freuen uns auf deine Nachricht!</p>
 
             <form id="contactForm" action="mailto:Chronixx.ghg@proton.me" method="post" enctype="text/plain">
@@ -54,7 +60,7 @@
     </footer>
 
     <script>
-        // JavaScript für die schrumpfende Navigation (muss auf jeder Seite sein)
+        // JavaScript für die schrumpfende Navigation
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
             if (window.scrollY > 50) {
@@ -67,6 +73,14 @@
         // Optional: Bestätigungsnachricht, da es kein echtes Formular ist
         document.getElementById('contactForm').addEventListener('submit', function(event) {
             alert('Dein E-Mail-Programm wird geöffnet, um die Nachricht zu senden. Bitte bestätige dort den Versand!');
+        });
+
+        // JavaScript zum Ausblenden des Preloaders
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.classList.add('hidden');
+            }
         });
     </script>
 </body>

@@ -8,13 +8,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body class="satisfactory">
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
     <header>
         <div class="container">
             <h1>Satisfactory Server</h1>
             <nav>
                 <ul>
                     <li><a href="index.html">Startseite</a></li>
-                    <li><a href="satisfactory.html">Satisfactory</a></li> <li><a href="minecraft.html">Minecraft</a></li>
+                    <li><a href="satisfactory.html">Satisfactory</a></li>
+                    <li><a href="minecraft.html">Minecraft</a></li>
                     <li><a href="discord.html">Discord Server</a></li>
                     <li><a href="contact.html">Kontakt ✉️</a></li>
                 </ul>
@@ -40,15 +44,25 @@
             <p>&copy; 2025 Dein Name - FICSIT Inc. Genehmigt</p>
         </div>
     </footer>
+
+    <script>
+        // JavaScript für die schrumpfende Navigation
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // JavaScript zum Ausblenden des Preloaders
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
-<script>
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 50) { // Wenn mehr als 50px gescrollt wurde
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-</script>
 </html>
