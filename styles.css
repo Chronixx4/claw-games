@@ -50,8 +50,8 @@ body {
     font-family: 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--ficsit-dark); /* Standard-Hintergrund, wird überschrieben */
-    color: var(--ficsit-light); /* Standard-Textfarbe, wird überschrieben */
+    background-color: var(--ficsit-dark); /* Standard-Hintergrund, wird thematisch überschrieben */
+    color: var(--ficsit-light); /* Standard-Textfarbe, wird thematisch überschrieben */
     line-height: 1.6;
 }
 
@@ -61,16 +61,26 @@ body {
     padding: 0 var(--spacing-md);
 }
 
+/* Liquid Glass Basis Stil */
+.liquid-glass-card {
+    background-color: rgba(44, 62, 80, 0.7); /* Standard Liquid Glass Farbe */
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+}
+
 /* ============================ */
 /* II. Header & Navigation Stile */
 /* ============================ */
 
 header {
-    background-color: rgba(44, 62, 80, 0.7); /* Liquid Glass Optik */
+    background-color: rgba(44, 62, 80, 0.7);
     backdrop-filter: blur(10px) saturate(180%);
     -webkit-backdrop-filter: blur(10px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.125);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -135,9 +145,26 @@ nav ul li a:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Könnte auch eine Variable werden */
 }
 
-/* ================== */
-/* III. Main Content */
-/* ================== */
+/* Stile für den aktiven Navigationslink (allgemein) */
+nav ul li a.active {
+    background-color: var(--ficsit-dark); /* Hintergrundfarbe des aktiven Links */
+    color: var(--ficsit-orange); /* Textfarbe des aktiven Links */
+    border: 2px solid var(--ficsit-orange); /* Rand für Hervorhebung */
+    cursor: default; /* Zeiger ändern, da es die aktuelle Seite ist */
+    transform: translateY(0); /* Keine Hover-Animation für aktiven Link */
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4); /* Leichter innerer Schatten */
+}
+
+nav ul li a.active:hover {
+    background-color: var(--ficsit-dark); /* Auch beim Hover bleibt die Farbe gleich */
+    transform: translateY(0); /* Keine Animation beim Hover */
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
+}
+
+
+/* ============================ */
+/* III. Main Content & Cards   */
+/* ============================ */
 
 main {
     padding: var(--spacing-xl) 0;
@@ -146,11 +173,12 @@ main {
 
 /* Allgemeine Karten-Stile (server-info-card, welcome-card, news-feed-card) */
 .server-info-card { /* Wird als Basis für andere Karten wiederverwendet */
-    background-color: rgba(44, 62, 80, 0.7); /* Liquid Glass Optik */
+    background-color: rgba(44, 62, 80, 0.7);
     backdrop-filter: blur(10px) saturate(180%);
     -webkit-backdrop-filter: blur(10px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.125);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+
     padding: var(--spacing-lg);
     border-radius: var(--border-radius-lg);
     border: 2px solid var(--ficsit-border); /* Standard, wird thematisch überschrieben */
@@ -182,8 +210,9 @@ main {
     justify-content: space-between;
     align-items: center;
     font-size: 1.1em;
+    /* Hier die initialen Eigenschaften für die Animation setzen */
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(20px);
     animation: slideInUp 0.5s ease-out forwards;
 }
 
@@ -220,11 +249,11 @@ main {
 footer {
     text-align: center;
     padding: var(--spacing-md) 0;
-    background-color: rgba(44, 62, 80, 0.7); /* Liquid Glass Optik */
+    background-color: rgba(44, 62, 80, 0.7);
     backdrop-filter: blur(10px) saturate(180%);
     -webkit-backdrop-filter: blur(10px) saturate(180%);
-    border-top: 1px solid rgba(255, 255, 255, 0.125);
-    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.25); /* Schatten nach oben */
     color: var(--ficsit-light);
     border-top: 3px solid var(--ficsit-border); /* Standard, wird thematisch überschrieben */
 }
@@ -240,9 +269,8 @@ footer {
 }
 .homepage header {
     background-color: rgba(44, 62, 80, 0.7);
-    border-bottom-color: var(--homepage-accent);
+    border-bottom: 3px solid var(--homepage-accent);
     color: #fff;
-    border-bottom: 1px solid rgba(102, 252, 241, 0.3);
 }
 .homepage nav ul li a {
     background-color: var(--homepage-accent);
@@ -251,6 +279,17 @@ footer {
 .homepage nav ul li a:hover {
     background-color: #4AD9E8;
 }
+/* Anpassung für aktiven Navigationslink auf Homepage */
+.homepage nav ul li a.active {
+    background-color: var(--homepage-bg); /* Dunkler Hintergrund */
+    color: var(--homepage-accent); /* Akzentfarbe als Textfarbe */
+    border-color: var(--homepage-accent);
+}
+.homepage nav ul li a.active:hover {
+    background-color: var(--homepage-bg);
+}
+
+
 .homepage .welcome-card {
     background-color: rgba(44, 62, 80, 0.7);
     border: 1px solid rgba(102, 252, 241, 0.3);
@@ -268,9 +307,8 @@ footer {
 }
 .homepage footer {
     background-color: rgba(44, 62, 80, 0.7);
-    border-top-color: var(--homepage-accent);
+    border-top: 3px solid var(--homepage-accent);
     color: var(--homepage-text);
-    border-top: 1px solid rgba(102, 252, 241, 0.3);
 }
 
 /* Game Links / Buttons (auf Homepage) */
@@ -290,6 +328,7 @@ footer {
     text-transform: uppercase;
     transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, background-color var(--transition-speed) ease;
     box-shadow: var(--shadow-md);
+    /* Hier die initialen Eigenschaften für die Animation setzen */
     opacity: 0;
     transform: translateY(20px);
     animation: slideInUp 0.6s ease-out forwards;
@@ -332,7 +371,7 @@ footer {
 /* News Feed Stile (für Startseite) */
 .news-feed-card { /* Nutzt .server-info-card als Basis */
     margin-top: var(--spacing-xl);
-    animation-delay: 1.2s;
+    animation-delay: 1.2s; /* Verzögerung für die fadeInScale Animation der Karte selbst */
     /* Spezifische Anpassungen für News-Feed */
     border: 1px solid rgba(102, 252, 241, 0.3); /* Homepage-Accent als Rand */
 }
@@ -350,15 +389,11 @@ footer {
     margin-bottom: var(--spacing-md);
     border-left: 5px solid rgba(102, 252, 241, 0.7); /* Homepage-Accent als Streifen */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    animation: slideInUp 0.6s ease-out forwards;
+    /* Hier die initialen Eigenschaften für die Animation setzen */
     opacity: 0;
     transform: translateY(20px);
+    animation: slideInUp 0.6s ease-out forwards;
 }
-
-/* Verzögerung für jeden News-Eintrag (wenn statisch im HTML, sonst JS) */
-/* .news-item:nth-child(1) { animation-delay: 1.4s; } */
-/* .news-item:nth-child(2) { animation-delay: 1.6s; } */
-/* .news-item:nth-child(3) { animation-delay: 1.8s; } */
 
 .news-item h3 {
     color: var(--homepage-accent);
@@ -411,6 +446,41 @@ footer {
     vertical-align: middle; /* Vertikale Ausrichtung */
 }
 
+/* Stil für den "Mehr laden" Button (allgemein) */
+.load-more-button {
+    /* display: block; -- Bereits definiert und gut so */
+    width: fit-content; /* Passt die Breite an den Inhalt an */
+    margin: var(--spacing-lg) auto; /* Zentriert den Button horizontal */
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: 1.1em;
+    cursor: pointer;
+    /* Angepasste Farben für Konsistenz mit dem aktuellen Thema */
+    background-color: var(--homepage-accent); /* Standard für Homepage/allgemein */
+    color: var(--homepage-bg); /* Textfarbe, die auf dem Akzent gut lesbar ist */
+    border: none;
+    border-radius: var(--border-radius-md);
+    transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    box-shadow: var(--shadow-md);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.load-more-button:hover {
+    background-color: #4AD9E8; /* Dunklerer Ton des homepage-accents beim Hover */
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Spezifische Anpassungen für den Clips-Seiten-Button */
+.clips-page .load-more-button {
+    background-color: #FFD700; /* Gold-Ton für Clips-Seite */
+    color: #333; /* Dunkler Text auf Gold */
+}
+
+.clips-page .load-more-button:hover {
+    background-color: #E6C200; /* Dunklerer Gold-Ton beim Hover */
+}
+
 
 /* --- Satisfactory Stile (satisfactory.html) --- */
 .satisfactory body {
@@ -419,8 +489,7 @@ footer {
 }
 .satisfactory header {
     background-color: rgba(44, 62, 80, 0.7);
-    border-bottom-color: var(--ficsit-orange);
-    border-bottom: 1px solid rgba(255, 107, 0, 0.3);
+    border-bottom: 3px solid var(--ficsit-orange);
 }
 .satisfactory nav ul li a {
     background-color: var(--ficsit-orange);
@@ -428,6 +497,17 @@ footer {
 .satisfactory nav ul li a:hover {
     background-color: #E65A00;
 }
+/* Anpassung für aktiven Navigationslink auf Satisfactory-Seite */
+.satisfactory nav ul li a.active {
+    background-color: var(--ficsit-dark); /* Dunklerer Hintergrund */
+    color: var(--ficsit-orange); /* Orange Textfarbe */
+    border-color: var(--ficsit-orange);
+}
+.satisfactory nav ul li a.active:hover {
+    background-color: var(--ficsit-dark);
+}
+
+
 .satisfactory .server-info-card {
     background-color: rgba(44, 62, 80, 0.7);
     border: 1px solid rgba(26, 188, 156, 0.3);
@@ -448,8 +528,7 @@ footer {
 }
 .satisfactory footer {
     background-color: rgba(44, 62, 80, 0.7);
-    border-top-color: var(--ficsit-border);
-    border-top: 1px solid rgba(26, 188, 156, 0.3);
+    border-top: 3px solid var(--ficsit-border);
 }
 
 /* --- Minecraft Stile (minecraft.html) --- */
@@ -461,7 +540,12 @@ footer {
     background-color: rgba(76, 175, 80, 0.7);
     border-color: var(--minecraft-light-green);
     color: #fff;
-    border-color: rgba(139, 195, 74, 0.3);
+}
+.minecraft header {
+    border-bottom: 3px solid var(--minecraft-light-green);
+}
+.minecraft footer {
+    border-top: 3px solid var(--minecraft-light-green);
 }
 .minecraft nav ul li a {
     background-color: var(--minecraft-light-green);
@@ -471,6 +555,17 @@ footer {
     background-color: var(--minecraft-wood-orange);
     color: #fff;
 }
+/* Anpassung für aktiven Navigationslink auf Minecraft-Seite */
+.minecraft nav ul li a.active {
+    background-color: var(--minecraft-dark-green); /* Dunkleres Grün */
+    color: var(--minecraft-sand-yellow); /* Gelber Text */
+    border-color: var(--minecraft-light-green);
+}
+.minecraft nav ul li a.active:hover {
+    background-color: var(--minecraft-dark-green);
+}
+
+
 .minecraft .server-info-card {
     background-color: rgba(76, 175, 80, 0.8);
     backdrop-filter: blur(8px) saturate(150%);
@@ -515,7 +610,12 @@ footer {
     background-color: rgba(54, 57, 63, 0.7);
     border-color: #7289DA;
     color: #fff;
-    border-color: rgba(88, 101, 242, 0.3);
+}
+.discord header {
+    border-bottom: 3px solid #7289DA;
+}
+.discord footer {
+    border-top: 3px solid #7289DA;
 }
 .discord nav ul li a {
     background-color: #7289DA;
@@ -524,11 +624,22 @@ footer {
 .discord nav ul li a:hover {
     background-color: #6A7FD4;
 }
+/* Anpassung für aktiven Navigationslink auf Discord-Seite */
+.discord nav ul li a.active {
+    background-color: #424549; /* Discord Mittelgrau */
+    color: #7289DA; /* Discord Blau */
+    border-color: #7289DA;
+}
+.discord nav ul li a.active:hover {
+    background-color: #424549;
+}
+
+
 .discord .server-info-card {
     background-color: rgba(54, 57, 63, 0.7);
     border-color: #5865F2;
     color: #DCDDDE;
-    border-color: rgba(88, 101, 242, 0.3);
+    border: 1px solid rgba(88, 101, 242, 0.3); /* Border kann hier spezifiziert werden, um die liquid-glass-card zu überschreiben */
 }
 .discord .server-info-card h2 {
     color: #5865F2;
@@ -548,12 +659,12 @@ footer {
     color: #7289DA;
 }
 /* Anpassung für Game-Buttons innerhalb von Info-Karten (für Discord-Link) */
-.server-info-card .game-button { /**/
-    display: inline-block; /**/
-    text-align: center; /**/
-    max-width: 300px; /**/
-    width: 100%; /**/
-    margin: 0 auto; /**/ /* Zentriert den Button, wenn er block- oder inline-block ist und width begrenzt ist */
+.server-info-card .game-button {
+    display: inline-block;
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+    margin: 0 auto; /* Zentriert den Button, wenn er block- oder inline-block ist und width begrenzt ist */
 }
 
 
@@ -566,7 +677,12 @@ footer {
     background-color: rgba(51, 51, 51, 0.7);
     border-color: #FFD700;
     color: #fff;
-    border-color: rgba(255, 215, 0, 0.3);
+}
+.clips-page header {
+    border-bottom: 3px solid #FFD700;
+}
+.clips-page footer {
+    border-top: 3px solid #FFD700;
 }
 .clips-page nav ul li a {
     background-color: #FFD700;
@@ -575,11 +691,22 @@ footer {
 .clips-page nav ul li a:hover {
     background-color: #E6C200;
 }
+/* Anpassung für aktiven Navigationslink auf Clips-Seite */
+.clips-page nav ul li a.active {
+    background-color: #333; /* Dunkler Hintergrund */
+    color: #FFD700; /* Goldener Text */
+    border-color: #FFD700;
+}
+.clips-page nav ul li a.active:hover {
+    background-color: #333;
+}
+
+
 .clips-page .server-info-card { /* Wiederverwendet die Styling-Klasse */
     background-color: rgba(68, 68, 68, 0.7);
     border-color: #FFD700;
     color: #eee;
-    border-color: rgba(255, 215, 0, 0.3);
+    border: 1px solid rgba(255, 215, 0, 0.3); /* Border kann hier spezifiziert werden, um die liquid-glass-card zu überschreiben */
 }
 .clips-page .server-info-card h2 {
     color: #FFD700;
@@ -836,7 +963,7 @@ button[type="submit"] {
     }
 
     .cta {
-        font-size: 1.1em;
+        font-size: 1em;
     }
 
     .game-links {

@@ -54,6 +54,7 @@
         </div>
     </footer>
 
+    <script src="scripts.js"></script>
     <script>
         // Funktion zum Abrufen und Anzeigen des Serverstatus
         async function fetchMinecraftServerStatus() {
@@ -71,11 +72,10 @@
             playerCountElement.className = 'status-loading';
 
             try {
-                const response = await fetch(apiUrl); // API-Anfrage senden
-                const data = await response.json(); // Antwort als JSON parsen
+                const response = await fetch(apiUrl);
+                const data = await response.json();
 
                 if (data.online) {
-                    // Server ist online
                     onlineStatusElement.textContent = 'Online ✅';
                     onlineStatusElement.className = 'status-online';
                     const onlinePlayers = data.players.online || 0;
@@ -83,14 +83,12 @@
                     playerCountElement.textContent = `${onlinePlayers} / ${maxPlayers}`;
                     playerCountElement.className = 'status-online';
                 } else {
-                    // Server ist offline
                     onlineStatusElement.textContent = 'Offline ❌';
                     onlineStatusElement.className = 'status-offline';
                     playerCountElement.textContent = 'N/A';
                     playerCountElement.className = 'status-offline';
                 }
             } catch (error) {
-                // Fehlerbehandlung
                 console.error("Fehler beim Abrufen des Minecraft-Serverstatus:", error);
                 onlineStatusElement.textContent = 'Fehler ⚠️';
                 onlineStatusElement.className = 'status-error';
@@ -99,29 +97,9 @@
             }
         }
 
-        // Rufe den Status beim Laden der Seite ab
-        window.onload = fetchMinecraftServerStatus;
-
-        // Optional: Aktualisiere den Status alle 60 Sekunden
-        setInterval(fetchMinecraftServerStatus, 60000); // 60000 ms = 1 Minute
-
-
-        // JavaScript für die schrumpfende Navigation
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // JavaScript zum Ausblenden des Preloaders
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('preloader');
-            if (preloader) {
-                preloader.classList.add('hidden');
-            }
+        // Lade den Minecraft Server Status nach DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchMinecraftServerStatus();
         });
     </script>
 </body>

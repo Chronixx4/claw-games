@@ -31,19 +31,19 @@
             <section class="server-info-card">
                 <h2>Discord Community 🤝</h2>
                 <p>Trete unserem Discord Server bei, um mit anderen Spielern zu chatten, dich zu organisieren und immer auf dem Laufenden zu bleiben!</p>
-                
+
                 <div style="text-align: center; margin-top: 25px; margin-bottom: 25px;">
                     <a href="https://discord.gg/uPBasXs8gt" target="_blank" rel="noopener noreferrer" class="game-button discord-button">
                         Dem Discord beitreten! 👋
                     </a>
                 </div>
-                
+
                 <p class="cta">Komm vorbei und sag Hallo! Wir freuen uns auf dich! 👋</p>
             </section>
 
             <section class="discord-widget-container" style="text-align: center; margin-top: 40px;">
                 <h2>Server-Aktivität live! 📊</h2>
-                <iframe src="https://discord.com/widget?id=1033415051601780766&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+                <iframe src="https://discord.com/widget?id=1033415051601780766&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" loading="lazy"></iframe>
                 <p class="cta" style="margin-top: 20px;">Sieh, wer gerade online ist und tritt dem Chat bei! 🗣️</p>
             </section>
 
@@ -62,132 +62,78 @@
         </div>
     </footer>
 
+    <script src="scripts.js"></script>
     <script>
-        // JavaScript für die schrumpfende Navigation
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
         // Funktion zum dynamischen Laden der 3 neuesten Videos
-        function loadLatestDiscordClips() {
+        async function loadLatestDiscordClips() {
             const discordClipGrid = document.getElementById('discordClipGrid');
             if (!discordClipGrid) {
                 console.error("Element mit ID 'discordClipGrid' nicht gefunden.");
                 return;
             }
 
-            // Dies ist deine zentrale Liste ALLER Videos, geordnet von neuestem zu ältestem
-            // Die Reihenfolge in diesem Array bestimmt, was als "neuestes" Video gilt.
-            // Du kannst optional das 'date'-Feld hinzufügen und die Sortierzeile einkommentieren.
-            const allClips = [
-                {
-                    mp4: "clips/MedalTVREPO20250629003859-tr-edit.mp4",
-                    webm: "clips/MedalTVREPO20250629003859-tr-edit.webm",
-                    title: "Epischer Moment (29. Juni)",
-                    date: new Date('2025-06-29'),
-                },
-                {
-                    mp4: "clips/14813553.6_2C54388F94DA0C53.mp4",
-                    webm: "clips/epischer_moment.webm",
-                    title: "Noch ein ep. Moment (20. Juni)",
-                    date: new Date('2025-06-20'),
-                },
-                {
-                    mp4: "clips/lustiger_fail.mp4",
-                    webm: "clips/lustiger_fail.webm",
-                    title: "Lustiger Fail (15. Juni)",
-                    date: new Date('2025-06-15'),
-                },
-                {
-                    mp4: "clips/anderes_video_aelter.mp4", // Beispiel für ein älteres Video
-                    webm: "clips/anderes_video_aelter.webm",
-                    title: "Älteres Video (10. Juni)",
-                    date: new Date('2025-06-10'),
-                },
-                // Füge hier weitere deiner lokalen Videodateien hinzu.
-                // Denk daran, das neueste Video zuerst in der Liste zu platzieren,
-                // ODER die Zeile zum Sortieren nach Datum zu aktivieren (siehe unten).
-                // { mp4: "clips/dein_neuester_clip.mp4", webm: "clips/dein_neuester_clip.webm", title: "Neuester Clip", date: new Date('2025-07-01') },
-            ];
-
-            // OPTIONAL: Sortiere die Clips nach Datum (neuestes zuerst).
-            // Entferne die // am Anfang der nächsten Zeile, um diese Funktion zu aktivieren.
-            // allClips.sort((a, b) => b.date - a.date);
-
-            // Nimm nur die ersten 3 Videos (die neuesten)
+            let allClips = [];
+            try {
+                const response = await fetch('clips.json'); // Lade von clips.json
+                allClips = await response.json();
+                // Sortiere die Clips nach Datum (neuestes zuerst)
+                allClips.sort((a, b) => new Date(b.date) - new Date(a.date));
+            } catch (error) {
+                console.error("Fehler beim Laden der Clips-Daten für Discord:", error);
+                discordClipGrid.innerHTML = '<p style="text-align: center; color: var(--discord-text);">Fehler beim Laden der Clips.</p>';
+                return;
+            }
+            
             const latest3Clips = allClips.slice(0, 3);
-
-            // Entferne alle vorhandenen Inhalte aus dem discordClipGrid vor dem Hinzufügen
-            discordClipGrid.innerHTML = '';
+            discordClipGrid.innerHTML = ''; // Inhalt leeren
 
             latest3Clips.forEach(video => {
                 const clipItem = document.createElement('div');
                 clipItem.className = 'clip-item';
-
                 const innerDiv = document.createElement('div');
                 innerDiv.style.position = 'relative';
-                innerDiv.style.paddingBottom = '56.25%'; // 16:9 Seitenverhältnis
+                innerDiv.style.paddingBottom = '56.25%';
                 innerDiv.style.height = '0';
                 innerDiv.style.overflow = 'hidden';
-                innerDiv.style.backgroundColor = '#000'; // Hintergrundfarbe falls Video nicht lädt
-
+                innerDiv.style.backgroundColor = '#000';
                 const videoElement = document.createElement('video');
-                videoElement.controls = true; // Zeigt Videosteuerung an (Play/Pause, Lautstärke etc.)
-                videoElement.preload = 'metadata'; // Lädt nur Metadaten (Länge, Dimensionen)
+                videoElement.controls = true;
+                videoElement.preload = 'metadata';
                 videoElement.style.position = 'absolute';
                 videoElement.style.top = '0';
                 videoElement.style.left = '0';
                 videoElement.style.width = '100%';
                 videoElement.style.height = '100%';
                 videoElement.style.display = 'block';
-
-                // MP4 Source hinzufügen
+                videoElement.loading = 'lazy'; // Lazy Loading für Video hinzufügen
                 const sourceMp4 = document.createElement('source');
                 sourceMp4.src = video.mp4;
                 sourceMp4.type = 'video/mp4';
                 videoElement.appendChild(sourceMp4);
-
-                // WebM Source hinzufügen, falls vorhanden (für bessere Browser-Kompatibilität)
                 if (video.webm) {
                     const sourceWebm = document.createElement('source');
                     sourceWebm.src = video.webm;
                     sourceWebm.type = 'video/webm';
                     videoElement.appendChild(sourceWebm);
                 }
-
-                // Fallback-Text für Browser, die das Video-Tag nicht unterstützen
                 const fallbackText = document.createTextNode('Dein Browser unterstützt das Video-Tag nicht. Bitte aktualisiere ihn.');
                 videoElement.appendChild(fallbackText);
-
                 innerDiv.appendChild(videoElement);
                 clipItem.appendChild(innerDiv);
                 discordClipGrid.appendChild(clipItem);
 
-                // Füge den Hover-Effekt für lokale Videos hinzu
                 clipItem.addEventListener('mouseenter', () => {
                     videoElement.play().catch(e => console.error("Fehler beim Abspielen des Videos:", e));
                 });
-
                 clipItem.addEventListener('mouseleave', () => {
                     videoElement.pause();
-                    videoElement.currentTime = 0; // Setzt das Video auf den Anfang zurück
+                    videoElement.currentTime = 0;
                 });
             });
         }
 
-        // JavaScript zum Ausblenden des Preloaders
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('preloader');
-            if (preloader) {
-                preloader.classList.add('hidden');
-            }
-
-            // Lade die neuesten Clips für die Discord-Seite
+        // Lade die Discord Clips nach DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', function() {
             loadLatestDiscordClips();
         });
     </script>

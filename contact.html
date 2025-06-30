@@ -60,28 +60,11 @@
         </div>
     </footer>
 
+    <script src="scripts.js"></script>
     <script>
-        // JavaScript für die schrumpfende Navigation
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
         // Optional: Bestätigungsnachricht, da es kein echtes Formular ist
         document.getElementById('contactForm').addEventListener('submit', function(event) {
             alert('Dein E-Mail-Programm wird geöffnet, um die Nachricht zu senden. Bitte bestätige dort den Versand!');
-        });
-
-        // JavaScript zum Ausblenden des Preloaders
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('preloader');
-            if (preloader) {
-                preloader.classList.add('hidden');
-            }
         });
     </script>
 </body>

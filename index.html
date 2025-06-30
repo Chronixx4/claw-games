@@ -40,18 +40,23 @@
 
             <section class="news-feed-card" id="newsFeed">
                 <h2>Neueste Updates! ✨</h2>
-                <div class="search-container" style="text-align: center; margin-bottom: 20px;">
-                    <input type="text" id="newsSearchInput" placeholder="News durchsuchen..." style="padding: 10px; border-radius: 5px; border: 1px solid var(--homepage-accent); background-color: var(--homepage-bg); color: var(--homepage-text); width: 80%; max-width: 400px;">
-                    <button id="newsSearchButton" class="game-button discord-button" style="margin-left: 10px; padding: 10px 15px; font-size: 1em; width: auto;">Suchen</button>
+                <div class="search-container">
+                    <input type="text" id="newsSearchInput" placeholder="News durchsuchen...">
+                    <button id="newsSearchButton" class="game-button discord-button">Suchen</button>
                 </div>
                 <div id="newsContent">
                     </div>
+                <div id="newsLoaderContainer" style="text-align: center; padding: 20px;">
+                    <button id="loadMoreNewsButton" class="load-more-button">Mehr Nachrichten laden</button>
+                    <div id="newsLoadingSpinner" class="loader" style="display: none;"></div>
+                    <p id="endOfNews" style="display: none; color: #999;">Keine weiteren Nachrichten verfügbar.</p>
+                </div>
             </section>
 
-            <section class="discord-widget-container" style="text-align: center; margin-top: 40px;">
+            <section class="discord-widget-container">
                 <h2>Discord Server-Aktivität live! 📊</h2>
-                <iframe src="https://discord.com/widget?id=1033415051601780766&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-                <p class="cta" style="margin-top: 20px;">Sieh, wer gerade online ist und tritt dem Chat bei! 🗣️</p>
+                <iframe src="https://discord.com/widget?id=1033415051601780766&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts" loading="lazy"></iframe>
+                <p class="cta">Sieh, wer gerade online ist und tritt dem Chat bei! 🗣️</p>
             </section>
         </div>
     </main>
@@ -61,98 +66,17 @@
         </div>
     </footer>
 
+    <script src="scripts.js"></script>
     <script>
-        // Array, das alle News-Artikel speichert (global oder außerhalb der Funktion, damit es zugänglich ist)
         let allNewsArticles = [];
+        let displayedNewsCount = 0;
+        const newsItemsPerLoad = 3; // Anzahl der Artikel, die pro Ladung angezeigt werden
+        let isLoadingNews = false; // Flag, um Mehrfachladungen zu verhindern
 
-        // JavaScript für die schrumpfende Navigation
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
-        // Funktion zum dynamischen Laden und Filtern der News-Einträge
-        function loadNewsFeed(searchTerm = '') {
-            const newsFeedElement = document.getElementById('newsFeed');
+        // Funktion zum Hinzufügen von News-Artikeln zum DOM
+        function appendNewsItems(articles) {
             const newsContentContainer = document.getElementById('newsContent');
-            if (!newsFeedElement || !newsContentContainer) {
-                console.error("News-Feed-Elemente nicht gefunden.");
-                return;
-            }
-
-            // News-Artikel definieren, falls noch nicht geschehen (nur einmal initial laden)
-            if (allNewsArticles.length === 0) {
-                allNewsArticles = [
-                    {
-                        title: "All the Mods 10-3.0 ist da! 🎉",
-                        date: "2025-05-20",
-                        content: `
-                            <p>Ein großes Update für All the Mods 10 ist verfügbar: <strong>Version 3.0</strong>! Hier sind die wichtigsten Änderungen:</p>
-                            <h4>Detaillierte Änderungen:</h4>
-                            <ul>
-                                <li><strong>Star Automation Rework:</strong> Modern Industrialization (MI) ist jetzt für Star Automation erforderlich, da es konstante Probleme mit MMR Multiblocks gab. Einige High-End-Hatches und Controller haben ein Rezept zur Konvertierung zu MI. Beachte, dass die Multiblock-Strukturmuster nicht mehr die gleichen sind wie zuvor in MMR; platziere den MI-Controller und verwende den MI-Schlüssel, um das Muster anzuzeigen. Bestehende MMR-Multiblocks behalten ihre Rezepte, aber es können keine neuen MMR-Controller mehr erstellt werden.</li>
-                            </ul>
-                            <h4>Neu hinzugefügte Mods:</h4>
-                            <ul>
-                                <li>Ars Elemancy (1.3)</li>
-                                <li>Silent's Gems (5.0.3)</li>
-                                <li>Starbunclemania (1.4.0.0)</li>
-                                <li>Transfer Labels (0.1.2)</li>
-                            </ul>
-                            <p>Die Neoforge-Version wurde auf <strong>21.1.172</strong> aktualisiert.</p>
-                            <h4>Bekannte Probleme:</h4>
-                            <ul>
-                                <li>Falls das Spiel beim Interagieren mit Ars Lectern abstürzt, einfach das Lectern abbauen und neu platzieren.</li>
-                            </ul>
-                            <p style="font-weight: bold; color: orange;">WICHTIG: IMMER EIN BACKUP ERSTELLEN, BEVOR DU UPDATEST!</p>
-                        `
-                    },
-                    {
-                        title: "Server-Wartung abgeschlossen! ✅",
-                        date: "2025-06-28",
-                        content: `<p>Die geplante Wartung unseres Minecraft-Servers ist erfolgreich abgeschlossen. Alles läuft wieder stabil! Viel Spaß beim Bauen!</p>`
-                    },
-                    {
-                        title: "Neues Modpack für Minecraft geplant! 📦",
-                        date: "2025-06-25",
-                        content: `<p>Wir prüfen aktuell ein neues Modpack für unseren Minecraft-Server. Bleibt dran für weitere Infos!</p>`
-                    },
-                    {
-                        title: "Satisfactory Update 9 ist da! 🚀",
-                        date: "2025-06-20",
-                        content: `<p>Das große Satisfactory Update 9 wurde veröffentlicht! Mehr Inhalte, mehr Fabrikwahnsinn!</p>`
-                    },
-                    // Füge neue News-Artikel hier hinzu.
-                ];
-
-                // Initial sortieren (nur einmal beim ersten Laden)
-                allNewsArticles.sort((a, b) => new Date(b.date) - new Date(a.date));
-            }
-
-
-            // Artikel basierend auf dem Suchbegriff filtern
-            let filteredArticles = allNewsArticles;
-            if (searchTerm) {
-                const lowerCaseSearchTerm = searchTerm.toLowerCase();
-                filteredArticles = allNewsArticles.filter(article =>
-                    article.title.toLowerCase().includes(lowerCaseSearchTerm) ||
-                    article.content.toLowerCase().includes(lowerCaseSearchTerm)
-                );
-            }
-
-            // Inhalt des Containers leeren
-            newsContentContainer.innerHTML = '';
-
-            if (filteredArticles.length === 0) {
-                newsContentContainer.innerHTML = '<p style="text-align: center; color: var(--homepage-text);">Keine Ergebnisse gefunden.</p>';
-                return;
-            }
-
-            filteredArticles.forEach((article, index) => {
+            articles.forEach(article => {
                 const newsItem = document.createElement('div');
                 newsItem.className = 'news-item';
 
@@ -174,30 +98,101 @@
             });
         }
 
-        // JavaScript zum Ausblenden des Preloaders und zum Initialisieren der Suchfunktion
-        window.addEventListener('load', function() {
-            const preloader = document.getElementById('preloader');
-            if (preloader) {
-                preloader.classList.add('hidden');
+        // Funktion zum Laden und Filtern der News-Einträge
+        async function loadNewsFeed(searchTerm = '', initialLoad = false) {
+            if (isLoadingNews) return; // Verhindere doppeltes Laden
+            isLoadingNews = true;
+
+            const newsContentContainer = document.getElementById('newsContent');
+            const newsLoadingSpinner = document.getElementById('newsLoadingSpinner');
+            const endOfNews = document.getElementById('endOfNews');
+            const loadMoreNewsButton = document.getElementById('loadMoreNewsButton');
+
+            if (allNewsArticles.length === 0 || initialLoad) {
+                // Lade die News-Daten nur einmal oder bei initialer Suche
+                try {
+                    const response = await fetch('news.json');
+                    allNewsArticles = await response.json();
+                    allNewsArticles.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sortiere nach Datum
+                } catch (error) {
+                    console.error("Fehler beim Laden der News-Daten:", error);
+                    newsContentContainer.innerHTML = '<p style="text-align: center; color: var(--homepage-text);">Fehler beim Laden der Nachrichten.</p>';
+                    newsLoadingSpinner.style.display = 'none';
+                    loadMoreNewsButton.style.display = 'none';
+                    isLoadingNews = false;
+                    return;
+                }
             }
 
-            // Lade den News-Feed beim Start (ohne Suchbegriff)
-            loadNewsFeed();
+            // Filtern der Artikel basierend auf dem Suchbegriff
+            const lowerCaseSearchTerm = searchTerm.toLowerCase();
+            let filteredArticles = allNewsArticles.filter(article =>
+                article.title.toLowerCase().includes(lowerCaseSearchTerm) ||
+                article.content.toLowerCase().includes(lowerCaseSearchTerm)
+            );
+
+            // Wenn ein Suchbegriff vorhanden ist oder InitialLoad, Container leeren und neu befüllen
+            if (searchTerm !== '' || initialLoad) {
+                newsContentContainer.innerHTML = '';
+                displayedNewsCount = 0;
+            }
+
+            // Zeige Lade-Indikator, verstecke Button und "Ende"-Nachricht
+            newsLoadingSpinner.style.display = 'block';
+            loadMoreNewsButton.style.display = 'none';
+            endOfNews.style.display = 'none';
+
+            // Lade die nächsten Artikel
+            const articlesToAppend = filteredArticles.slice(displayedNewsCount, displayedNewsCount + newsItemsPerLoad);
+            
+            if (articlesToAppend.length > 0) {
+                appendNewsItems(articlesToAppend);
+                displayedNewsCount += articlesToAppend.length;
+            }
+
+            // Verstecke Lade-Indikator nach kurzer Zeit
+            setTimeout(() => {
+                newsLoadingSpinner.style.display = 'none';
+                isLoadingNews = false;
+
+                // Aktualisiere Button- und End-Nachricht-Sichtbarkeit
+                if (displayedNewsCount < filteredArticles.length) {
+                    loadMoreNewsButton.style.display = 'block';
+                } else {
+                    loadMoreNewsButton.style.display = 'none';
+                    endOfNews.style.display = 'block';
+                    if (filteredArticles.length === 0) {
+                        newsContentContainer.innerHTML = '<p style="text-align: center; color: var(--homepage-text);">Keine Ergebnisse gefunden.</p>';
+                    }
+                }
+            }, 500); // Kurze Verzögerung für Lade-Spinner
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialer Ladevorgang beim DOMContentLoaded
+            loadNewsFeed('', true); // true für initialLoad
+
+            // Klick-Handler für den "Mehr laden" Button
+            const loadMoreNewsButton = document.getElementById('loadMoreNewsButton');
+            if (loadMoreNewsButton) {
+                loadMoreNewsButton.addEventListener('click', () => {
+                    loadNewsFeed(document.getElementById('newsSearchInput').value);
+                });
+            }
 
             // Suchfunktion initialisieren
             const newsSearchInput = document.getElementById('newsSearchInput');
             const newsSearchButton = document.getElementById('newsSearchButton');
 
             if (newsSearchInput) {
-                // Bei Eingabe im Suchfeld (live-Suche)
                 newsSearchInput.addEventListener('input', (event) => {
-                    loadNewsFeed(event.target.value);
+                    // Bei jeder Eingabe komplett neu filtern und laden
+                    loadNewsFeed(event.target.value, true);
                 });
 
-                // Bei Klick auf den Suchen-Button (falls gewünscht, obwohl Input-Event schon filtert)
                 if (newsSearchButton) {
                     newsSearchButton.addEventListener('click', () => {
-                        loadNewsFeed(newsSearchInput.value);
+                        loadNewsFeed(newsSearchInput.value, true);
                     });
                 }
             }
