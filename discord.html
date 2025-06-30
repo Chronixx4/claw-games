@@ -6,7 +6,7 @@
     <title>Discord Server - Tritt unserer Community bei!</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-</head>
+    </head>
 <body class="discord">
     <div id="preloader">
         <div class="loader"></div>
@@ -31,17 +31,61 @@
                 <h2>Discord Community 🤝</h2>
                 <p>Trete unserem Discord Server bei, um mit anderen Spielern zu chatten, dich zu organisieren und immer auf dem Laufenden zu bleiben!</p>
                 <ul>
-                    <li><strong>Einladungslink:</strong> <span class="info-value"><a href="[Discord-Einladungslink]" target="_blank" rel="noopener noreferrer">[Dein Einladungslink hier]</a></span></li>
+                    <li><strong>Einladungslink:</strong> <span class="info-value"><a href="https://discord.gg/uPBasXs8gt" target="_blank" rel="noopener noreferrer">Hier beitreten!</a></span></li>
                     <li><strong>Kanäle:</strong> <span class="info-value">[Anzahl der Kanäle, z.B. 15+]</span></li>
                     <li><strong>Mitglieder:</strong> <span class="info-value">[Anzahl der Mitglieder, z.B. 100+]</span></li>
                 </ul>
                 <p class="cta">Komm vorbei und sag Hallo! Wir freuen uns auf dich! 👋</p>
             </section>
+
+            <section class="discord-widget-container" style="text-align: center; margin-top: 40px;">
+                <h2>Server-Aktivität live! 📊</h2>
+                <iframe src="https://discord.com/widget?id=1033415051601780766&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+                <p class="cta" style="margin-top: 20px;">Sieh, wer gerade online ist und tritt dem Chat bei! 🗣️</p>
+            </section>
+
+            <section class="clip-gallery-card server-info-card" style="margin-top: 40px;">
+                <h2>Unsere besten Clips! 🎬</h2>
+                <p>Hier siehst du einige unserer lustigsten und epischsten Gaming-Momente. Viel Spaß beim Anschauen!</p>
+                <div class="clip-grid" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+                    
+                    <div class="clip-item" style="flex: 1 1 30%; min-width: 280px; max-width: 350px;">
+                        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000;">
+                            <video controls preload="metadata" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block;">
+                                <source src="clips/epischer_moment.mp4" type="video/mp4">
+                                <source src="clips/epischer_moment.webm" type="video/webm">
+                                Dein Browser unterstützt das Video-Tag nicht. Bitte aktualisiere ihn.
+                            </video>
+                        </div>
+                    </div>
+
+                    
+                    <div class="clip-item" style="flex: 1 1 30%; min-width: 280px; max-width: 350px;">
+                        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background-color: #000;">
+                            <video controls preload="metadata" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block;">
+                                <source src="clips/MedalTVREPO20250629003859-tr-edit.mp4" type="video/mp4">
+                                <source src="clips/lustiger_fail.webm" type="video/webm">
+                                Dein Browser unterstützt das Video-Tag nicht. Bitte aktualisiere ihn.
+                            </video>
+                        </div>
+                    </div>
+
+                    
+                    <div class="clip-item" style="flex: 1 1 30%; min-width: 280px; max-width: 350px;">
+                        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    
+                </div>
+                <p class="cta" style="margin-top: 30px;">Mehr Clips findest du in unserem Discord oder auf unserem YouTube-Kanal! 📺</p>
+            </section>
+
         </div>
     </main>
     <footer>
         <div class="container">
-            <p>&copy; 2025 Dein Name - Verbinde dich mit uns!</p>
+            <p>© 2025 Dein Name - Verbinde dich mit uns!</p>
         </div>
     </footer>
 
@@ -62,6 +106,20 @@
             if (preloader) {
                 preloader.classList.add('hidden');
             }
+
+            // JavaScript für Video-Hover-Effekt
+            const videoItems = document.querySelectorAll('.clip-item video');
+
+            videoItems.forEach(video => {
+                video.parentElement.parentElement.addEventListener('mouseenter', () => {
+                    video.play().catch(e => console.error("Fehler beim Abspielen des Videos:", e));
+                });
+
+                video.parentElement.parentElement.addEventListener('mouseleave', () => {
+                    video.pause();
+                    video.currentTime = 0; // Setzt das Video auf den Anfang zurück
+                });
+            });
         });
     </script>
 </body>

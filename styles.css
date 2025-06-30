@@ -12,6 +12,15 @@
     --homepage-accent: #66FCF1; /* Helle Akzentfarbe */
     --homepage-text: #C5C6C7; /* Heller Text */
     --homepage-card-bg: #2C3E50; /* Kartenhintergrund */
+
+    /* Minecraft Farben */
+    --minecraft-dark-green: #2E7D32; /* Dunkles Waldgrün für Hintergründe */
+    --minecraft-medium-green: #4CAF50; /* Klassisches Minecraft-Grasgrün für Kartenhintergründe */
+    --minecraft-light-green: #8BC34A; /* Helleres Grün für Akzente wie Ränder, Buttons */
+    --minecraft-dirt-brown: #795548; /* Dunkles Braun für Text oder Akzente */
+    --minecraft-stone-gray: #9E9E9E; /* Neutrales Grau für sekundären Text */
+    --minecraft-sand-yellow: #FFEB3B; /* Helles Gelb für Akzente wie Server-Werte, Online-Status */
+    --minecraft-wood-orange: #BF360C; /* Ein kräftiges Orange/Braun für Buttons im Hover-Zustand */
 }
 
 body {
@@ -433,67 +442,66 @@ footer {
 
 /* Minecraft-Stile */
 .minecraft body {
-    background-color: #A9D65B; /* Grüner Wiesen-Hintergrund */
-    color: #333; /* Standardtextfarbe dunkler für besseren Kontrast */
+    background-color: var(--minecraft-dark-green); /* Dunkles Waldgrün */
+    color: var(--minecraft-stone-gray); /* Neutrales Grau */
 }
 .minecraft header, .minecraft footer {
-    background-color: #558B2F; /* Dunkelgrün */
-    border-color: #8BC34A; /* Hellgrün */
-    color: #fff;
+    background-color: var(--minecraft-medium-green); /* Klassisches Grasgrün */
+    border-color: var(--minecraft-light-green); /* Helleres Grün */
+    color: #fff; /* Weißer Text */
     /* Liquid Glass Optik */
-    background-color: rgba(85, 139, 47, 0.7);
+    background-color: rgba(76, 175, 80, 0.7); /* Transparenteres Grasgrün */
     border-color: rgba(139, 195, 74, 0.3);
 }
 .minecraft nav ul li a {
-    background-color: #8BC34A; /* Minecraft Grün für Buttons */
-    color: #333;
+    background-color: var(--minecraft-light-green); /* Helleres Grün für Buttons */
+    color: var(--minecraft-dirt-brown); /* Dunkelbraun für Text auf Buttons */
 }
 .minecraft nav ul li a:hover {
-    background-color: #689F38; /* Dunkleres Grün beim Hover */
+    background-color: var(--minecraft-wood-orange); /* Kräftiges Orange/Braun */
+    color: #fff; /* Weißer Text beim Hover */
 }
 .minecraft .server-info-card {
-    /* Hier wird der Hintergrund der Karte dunkler für besseren Kontrast */
-    background-color: #4CAF50; /* Klassisches Minecraft-Grün, dunkler als vorher */
-    border-color: #388E3C; /* Dunklerer Rand */
-    color: #fff; /* Text auf der Karte wird weiß */
+    background-color: var(--minecraft-medium-green); /* Klassisches Grasgrün */
+    border-color: var(--minecraft-light-green); /* Helleres Grün */
+    color: var(--minecraft-stone-gray); /* Neutrales Grau für Haupttext auf Karte */
     /* Liquid Glass Optik */
     background-color: rgba(76, 175, 80, 0.8); /* Etwas dunkler, damit es sich vom Body abhebt */
-    backdrop-filter: blur(8px) saturate(150%); /* Leicht angepasster Blur */
+    backdrop-filter: blur(8px) saturate(150%);
     -webkit-backdrop-filter: blur(8px) saturate(150%);
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Hellerer, subtilerer Rand */
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 .minecraft .server-info-card h2 {
-    color: #333; /* Überschrift auf der Karte dunkel, um sich vom neuen helleren Kartentext abzuheben */
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5); /* Leichter Schatten für Lesbarkeit */
+    color: var(--minecraft-dirt-brown); /* Dunkelbraun für Überschrift */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 /* Fließtext auf der Karte (Begib dich in eine Welt voller Abenteuer...) */
 .minecraft .server-info-card p {
-    color: #DCE775; /* Ein helleres Grün/Gelb für den Einführungstext */
+    color: var(--minecraft-sand-yellow); /* Helles Gelb */
 }
 .minecraft .server-info-card ul li {
-    /* Listeneinträge dunkler */
-    background-color: #689F38; /* Dunkleres Grün für Listeneinträge */
-    border-left-color: #388E3C; /* Passender dunklerer Akzentstreifen */
-    color: #fff; /* Text in Listeneinträgen weiß */
+    background-color: var(--minecraft-dark-green); /* Dunkles Waldgrün für Listeneinträge */
+    border-left-color: var(--minecraft-light-green); /* Helleres Grün als Akzentstreifen */
+    color: var(--minecraft-stone-gray); /* Neutrales Grau */
     /* Liquid Glass Optik */
-    background-color: rgba(104, 159, 56, 0.6); /* Etwas transparenter, dunkler */
-    border-left-color: rgba(56, 142, 60, 0.8);
+    background-color: rgba(46, 125, 50, 0.6); /* Etwas transparenter, dunkler */
+    border-left-color: rgba(139, 195, 74, 0.8);
 }
 .minecraft .server-info-card ul li strong {
-    color: #DCE775; /* Label-Text in Listeneinträgen in hellem Gelbgrün */
+    color: var(--minecraft-sand-yellow); /* Helles Gelb */
 }
 .minecraft .info-value {
-    color: #DCE775; /* Werte (IP, Port) in hellem Gelbgrün */
+    color: var(--minecraft-sand-yellow); /* Helles Gelb */
     font-weight: bold;
 }
 .minecraft .cta {
-    color: #DCE775; /* CTA Text auch in hellem Gelbgrün */
+    color: var(--minecraft-sand-yellow); /* Helles Gelb */
 }
 
 /* Anpassung für die Haupt-Überschrift des Headers auf der Minecraft-Seite */
 .minecraft header h1 {
-    color: #333; /* Macht die Überschrift im Header dunkel */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Optional: leichter Schatten für bessere Sichtbarkeit */
+    color: #fff; /* Weißer Text, um sich vom dunkleren Header abzuheben */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* Discord-Stile */
@@ -790,4 +798,48 @@ button[type="submit"] {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* --- Stile für die Clip-Galerie (Discord-Seite) --- */
+.clip-gallery-card .clip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px; /* Abstand zwischen den Clips */
+}
+
+.clip-gallery-card .clip-item {
+    flex: 1 1 30%; /* Versucht, 3 Clips pro Reihe anzuzeigen */
+    min-width: 280px; /* Minimale Breite für kleine Bildschirme */
+    max-width: 350px; /* Maximale Breite pro Clip */
+    
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Übergang für Vergrößerung und Schatten */
+    cursor: pointer; /* Zeigt an, dass es interaktiv ist */
+    position: relative; /* Wichtig für z-index beim Hover */
+    z-index: 1; /* Standard-Z-Index */
+}
+
+.clip-gallery-card .clip-item:hover {
+    transform: scale(1.50); /* *** HIER WURDE DER WERT AUF 1.15 GEÄNDERT *** */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* Fügt einen Schatten hinzu */
+    z-index: 10; /* Bringt das gehoverte Element in den Vordergrund */
+}
+
+/* Stil für das responsive Video-Container, sowohl für <video> als auch <iframe> */
+.clip-gallery-card .clip-item > div {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Seitenverhältnis (9 / 16 * 100%) */
+    height: 0;
+    overflow: hidden;
+    background-color: #000; /* Hintergrundfarbe falls Video nicht lädt */
+}
+
+.clip-gallery-card .clip-item video,
+.clip-gallery-card .clip-item iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
 }
